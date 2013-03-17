@@ -12,7 +12,8 @@ class StatusAdmin(admin.ModelAdmin):
     date_hierarchy = 'time'
 
     def ntime(self, obj):
-        return obj.time.strftime('%Y-%m-%d %H:%M:%S')
+        return datetime.now() - obj.time.replace(tzinfo=None)
+        #return obj.time.strftime('%Y-%m-%d %H:%M:%S')
     ntime.short_description = u'时间'
 
 admin.site.register(Status, StatusAdmin)
