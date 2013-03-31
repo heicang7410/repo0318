@@ -11,7 +11,8 @@ def hello(request):
     return render(request, 'hello.html', {'result': x+1, 'data': data})
 
 def index(request):
-    return render(request, 'index.html', {})
+    data = Status.objects.order_by('-id')
+    return render(request, 'index.html', {'data': data})
 
 def login_view(request):
     username = request.POST['username']
@@ -26,4 +27,10 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+    return redirect('/index/')
+
+def say(request):
+    text = request.POST['text']
+    user = request.user
+    Status.objects.create(text=text, user=user)
     return redirect('/index/')

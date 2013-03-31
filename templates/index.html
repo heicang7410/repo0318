@@ -57,23 +57,23 @@
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
+      {% if user.is_authenticated %}
       <div class="hero-unit">
         <img src="http://designmodo.com/demo/flat-ui/images/illustrations/share.png" width="40" height="40">
-        <input type="text" class="input-xxlarge" placeholder="What are you doing?">
-        <p><a href="#" class="btn btn-primary">发布</a></p>
+        <form method="POST" action="/say/"> {% csrf_token %}
+        <input type="text" class="input-xxlarge" placeholder="What are you doing?" name="text">
+        <p><input type="submit" class="btn btn-primary" value="发布"></p>
+        </form>
       </div>
+      {% endif %}
 
       <!-- Example row of columns -->
       <div class="row">
         <div class="span8">
+          {% for status in data %}
           <p><img src="https://secure.gravatar.com/avatar/2218738f80750c8e64a517da82fa8de3?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="40" height="40">
-          Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
-
-          <p><img src="https://secure.gravatar.com/avatar/2218738f80750c8e64a517da82fa8de3?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="40" height="40">
-          Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
-
-          <p><img src="https://secure.gravatar.com/avatar/2218738f80750c8e64a517da82fa8de3?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="40" height="40">
-          Donec id elit non mi porta gravida at eget metus. Fusce dapibus.</p>
+            {{ status.text }}
+          {% endfor %}
 
         </div>
         <div class="span4">

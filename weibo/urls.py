@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^index/', 'status.views.index'),
     url(r'^login/', 'status.views.login_view'),
     url(r'^logout/', 'status.views.logout_view'),
+    url(r'^say/', 'status.views.say'),
 )
