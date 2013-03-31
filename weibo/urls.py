@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/', 'status.views.hello'),
     url(r'^index/', 'status.views.index'),
+    url(r'^login/', 'status.views.login_view'),
+    url(r'^logout/', 'status.views.logout_view'),
 )
