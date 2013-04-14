@@ -4,9 +4,6 @@ import tornado.escape
 import tornado.websocket
 
 import uuid
-import redis
-
-rds = redis.Redis(host='localhost', port=6379, db=0)
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -30,12 +27,8 @@ class ChatSocketHandler(tornado.websocket.WebSocketHandler):
             "id": str(uuid.uuid4()),
             "body": message['body']
         }
-	ps = rds.pubsub()
-	ps.subscribe('ch1')
-	for i in ps.listen():
-	    print i
-        #for waiter in ChatSocketHandler.waiters:
-        #    waiter.write_message(chat)
+        for waiter in ChatSocketHandler.waiters:
+            waiter.write_message(chat)
 
 
 application = tornado.web.Application([
